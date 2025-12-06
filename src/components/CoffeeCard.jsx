@@ -1,12 +1,21 @@
 import React from 'react';
 import { MapPin, Mountain, Droplet } from 'lucide-react';
 import './CoffeeCard.css';
+import coffeePlaceholder from '../assets/coffee-placeholder.jpg';
 
 const CoffeeCard = ({ coffee, onClick }) => {
     return (
         <div className="coffee-card" onClick={onClick} style={{ cursor: 'pointer' }}>
             <div className="card-image-wrapper">
-                <img src={coffee.image} alt={coffee.name} className="card-image" />
+                <img
+                    src={coffee.image || coffeePlaceholder}
+                    alt={coffee.name}
+                    className="card-image"
+                    onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = coffeePlaceholder;
+                    }}
+                />
                 <div className="card-rating">★ {coffee.rating}</div>
             </div>
             <div className="card-content">

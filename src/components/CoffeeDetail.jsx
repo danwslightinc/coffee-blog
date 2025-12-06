@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, MapPin, Mountain, Droplet } from 'lucide-react';
 import './CoffeeDetail.css';
+import coffeePlaceholder from '../assets/coffee-placeholder.jpg';
 
 const CoffeeDetail = ({ coffee, onClose }) => {
     if (!coffee) return null;
@@ -12,7 +13,15 @@ const CoffeeDetail = ({ coffee, onClose }) => {
 
                 <div className="detail-grid">
                     <div className="detail-image-wrapper">
-                        <img src={coffee.image} alt={coffee.name} className="detail-image" />
+                        <img
+                            src={coffee.image || coffeePlaceholder}
+                            alt={coffee.name}
+                            className="detail-image"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = coffeePlaceholder;
+                            }}
+                        />
                     </div>
 
                     <div className="detail-info">
